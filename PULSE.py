@@ -23,6 +23,8 @@ def db():
     return c
 
 def initialize():
+
+def initialize():
     with db() as c:
         c.executescript("""
         CREATE TABLE IF NOT EXISTS posts(
@@ -31,18 +33,21 @@ def initialize():
           author TEXT NOT NULL, category TEXT NOT NULL,
           url TEXT UNIQUE, created REAL NOT NULL
         );
+
         CREATE TABLE IF NOT EXISTS comments(
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           post_id INTEGER NOT NULL, author TEXT NOT NULL,
           body TEXT NOT NULL, created REAL NOT NULL
         );
+
         CREATE TABLE IF NOT EXISTS votes(
           post_id INTEGER NOT NULL, voter TEXT NOT NULL,
-          PRIMARY KEY(post_id,voter)
+          PRIMARY KEY(post_id, voter)
         );
+
         CREATE TABLE IF NOT EXISTS users(
           username TEXT PRIMARY KEY
-Text-first news, trends and community        );
+        );
         """)
 
 def clean(s, limit=2000):
