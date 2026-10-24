@@ -4,10 +4,12 @@ from urllib.request import Request, urlopen
 from xml.etree import ElementTree as ET
 from html import escape
 import sqlite3, time, secrets, re, html, threading, webbrowser
+import os
 
 DB = "pulse.db"
-HOST = "127.0.0.1"
-PORT = 8080
+
+HOST = "0.0.0.0"
+PORT = int(os.environ.get("PORT", 8080))
 
 FEEDS = [
     ("BBC World", "https://feeds.bbci.co.uk/news/world/rss.xml", "World"),
@@ -366,7 +368,7 @@ if __name__ == "__main__":
     initialize()
     print("=" * 38)
     print("PULSE IS STARTING")
-    print("Open http://127.0.0.1:8080")
+    print(f"Pulse running on port {PORT}")
     print("Keep Pydroid running.")
     print("=" * 38)
     try:
